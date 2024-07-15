@@ -1,0 +1,196 @@
+﻿@using CMS.ContentEngine
+@addTagHelper *, Kentico.Content.Web.Mvc
+
+@model NACSMagazine.Features.Home.HomePageViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+@section styles
+{
+    @* Includes CSS necessary for page builder functionality *@
+    <page-builder-styles />
+}
+@section scripts
+{
+    @* Includes scripts necessary for page builder functionality *@
+    <page-builder-scripts />
+}
+
+<!--Hero-->
+<div class="container section-spacer">
+	<div class="row">
+
+		<div class="col-lg-9">
+			<div class="hero-wrapper">
+				<img class="d-none d-sm-block img-fluid mx-auto" src="@Model.HomeHero.Image.Url" />
+				<img class="img-responsive mw-100 d-sm-none img-fluid mx-auto d-block" src="@Model.HomeHero.Image.Url" />
+				<div class="mx-auto d-block hero-container ">
+					@* TODO: Need to get article url *@
+					<a href="">
+						<div>
+							@if(Model.HomeHero.ContentCategory.Count() > 0)
+							{
+								<p class="font-g-14-m">@Model.HomeHero.CategoryTags</p>
+							}
+							
+							<h2 @((Model.HomeHero.Title.Length > 35) ? Html.Raw("style='font-size: 2em'") : "")>
+								@Model.HomeHero.Title</h2>
+							<p class="font-m-18">@Model.HomeHero.LedeText</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div style="text-align: center; margin-top: 3em">
+				@* Why is this not dynamic? *@
+				<a class="btn btn-primary" href="/Issues/June-2024" style="padding: 10px 20px 10px 20px;display:inline-block;">View All From Current Issue</a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 issue-wrapper">
+			<div class="row">
+				<div class="col-12 font-m-18-b"><p>CURRENT ISSUE</p></div>
+				@* <cms:CMSWebPartZone ZoneID="HeroZone2" runat="server" /> *@
+				@foreach (var article in Model.HeroFeaturedArticles)
+				{
+					<div class="col-md-6 col-lg-12">
+						<img class="img-fluid d-lg-none" src="">
+						<img class="img-fluid d-none d-lg-block" src="@article.RollupImage.Url">
+						@* TODO: Need to get article URL *@
+						<a href="">
+							<div class="issue-tile">
+								
+								<p class="font-g-14-m">@article.CategoryTags</p>
+								<p class="font-g-24">@article.Title</p>
+								<p class="font-m-18">@article.LedeText</p>
+							</div>
+						</a>
+					</div>
+				}
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+
+<!--Begin Sign In-->
+@* <cms:CMSWebPartZone ZoneID="SubscribeZone" runat="server" />*@
+@* TODO:Visible if current user is not in roles - NACSMagazineSubscriber;MemberContent;FullMember *@
+<div class="container-fluid section-spacer sign-wrapper">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<p class="font-g-28">Enjoy the latest issue of NACS Magazine</p>
+		</div>
+		<div class="col-12 col-lg-6">
+			<p class="font-m-16">
+				<strong>First-time visitors</strong>,<br />
+				Please subscribe for free access to the magazine.
+			</p>
+
+			<div class="col-12 col-xl-3"><a class="btn btn-primary w-100" data-feathr-click-track="true" data-feathr-link-aids="[&quot;5b2d4ba2ab913b3e4fcbf80a&quot;]" href="https://mynacs.convenience.org/My-Account/Subscriptions" style="padding:10px 0px 6px 0px">Subscribe</a></div>
+		</div>
+
+		<div class="col-12 col-lg-6">
+			<p class="font-m-16">
+				<strong>Subscribers</strong>,<br />
+				Please log in to read the latest issue.
+			</p>
+
+			<p class="font-m-16"><a data-feathr-click-track="true" data-feathr-link-aids="[&quot;5b2d4ba2ab913b3e4fcbf80a&quot;]" href="https://nacsmagazine.com/Convenience.org/ApplicationPages/Login.aspx?Source=">Log In&nbsp;<i class="fa fa-sign-in"></i></a></p>
+		</div>
+	</div>
+</div>
+<!--Begin Editor Picks-->
+<div class="container section-spacer">
+	<div class="row editor-container">
+		<div class="container-fluid justify-content-center section-title">
+			<hr class="">
+			<p class="d-flex justify-content-center">Editor&#8217;s Picks</p>
+		</div>
+@* 		<cms:CMSWebPartZone ZoneID="EditorsPicks" runat="server" />*@
+		@foreach (var article in Model.EditorPicksArticles)
+		{
+			<div class="col-md-6 col-lg-4">
+				@* TODO: Need to get article URL *@
+				<a href="">
+					<div class="mx-auto three-tile">
+						<img class="img-fluid justify-content-center" src="@article.RollupImage.Url">
+						<div>
+							<p class="font-g-14">@article.CategoryTags</p>
+							<p class="font-g-24">@article.Title</p>
+							<p class="font-m-16">@article.IssueDate.ToString("MMMM yyyy")</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		}
+	</div>
+</div>
+<!--Begin Departments-->
+<div class="container section-spacer">
+	<div class="container-fluid justify-content-center section-title">
+		<hr class="">
+		<p class="d-flex justify-content-center">Departments</p>
+	</div>
+
+	<div class="row align-items-top">
+
+@* 		<cms:CMSWebPartZone ZoneID="Departments" runat="server" />*@
+		@foreach (var article in Model.DepartmentArticles)
+		{
+			<div class="col-md-6 col-lg-3">
+				<div class="department-tile">
+					<p class="department-name">@article.MagazineSection</p>
+					<img class="d-none d-lg-block img-fluid" src="@article.RollupImage.Url">
+					<img class="d-lg-none img-fluid" src="@article.RollupImage.Url">
+					@* TODO: Get article URL *@
+					<a href=""><p>@article.Title</p></a>
+				</div>
+			</div>
+		}
+		<!--Show More Button Mobile--
+		  <div class="btn-show col-12 d-lg-none">
+			  <div class="text-center">
+				  <button class="btn btn-secondary" href="#" id="loadMore">See More</button>
+			  </div>
+		  </div>-->
+		<div class="col-12 col-lg-3">
+			<a href="#">
+				<img class="d-block d-md-none d-lg-block img-fluid mx-auto" src="~/_content/NACSMagazine/img/fill-ad-d-d.png">
+				<img class="d-none d-md-block d-lg-none img-fluid mx-auto" src="~/_content/NACSMagazine/img/fill-ad-d-m.png">
+			</a>
+		</div>
+	</div>
+</div>
+<!--Begin News-->
+<div class="container section-spacer">
+	<div class="container-fluid justify-content-center section-title">
+		<hr>
+		<p class="d-flex justify-content-center">NACS Daily News</p>
+	</div>
+@* 	<cms:CMSWebPartZone ZoneID="NewsZone" runat="server" />*@
+@* This is the correct markup for the NACS Daily News items but we don't have this data until the Convenience.org website is created - commenting out for now*@	
+	@* <div class="row">
+		<div class="col-m-12 col-lg-6">
+			<div class="row news-tile">
+				<div class="col-md-5">
+					<img class="img-fluid d-md-none" src="https://www.convenience.org/CMSPages/GetFile.aspx?guid=<%# Eval(" Image") %>">
+					<img class="img-fluid d-none d-md-block" src="https://www.convenience.org/CMSPages/GetFile.aspx?guid=<%# Eval(" Image") %>">
+				</div>
+				<div class="col-md-7 align-self-center">
+					<a href="https://www.convenience.org<%# GetDocumentUrlById(Eval(" DocumentID").ToString()) %>"><p style="margin-bottom:0.25em"><%# Eval("Title") %></p></a>
+					<%# FormatDateTime(Eval("Date"), "MMMM d, yyyy") %>
+				</div>
+			</div>
+		</div>
+	</div> *@
+</div>
+<!--Feature AD-->
+<div class="container section-spacer">
+	<div class="row ad-container">
+@* 		<cms:CMSWebPartZone ZoneID="AdZone_Bottom" runat="server" />
+ *@	</div>
+</div>

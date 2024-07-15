@@ -1,0 +1,364 @@
+﻿#downloads td, #downloads th {
+    font-size: 1.2em;
+}
+
+div.name {
+    width: 50%;
+    float: left;
+    padding: 5px;
+    height: 32px;
+    font-size: 1.2em;
+}
+
+div.status {
+    /*width:5%;*/
+    float: left;
+    height: 32px;
+    text-align: right;
+}
+
+div.update_link {
+    width: 20%;
+    float: left;
+    padding: 5px;
+    height: 32px;
+    font-size: 1.2em;
+}
+
+div.preview_link {
+    width: 15%;
+    float: left;
+    padding: 5px;
+    height: 32px;
+    font-size: 1.2em;
+}
+
+div.marketing_orders {
+    /*margin-left:25px;*/
+    /*font-size:1.2em;*/
+}
+
+div.clear {
+    clear: both;
+}
+
+div.column {
+    margin-bottom: 3%;
+}
+
+div#ExhibitorPortalContainer {
+    /*margin:auto;
+    width:700px;*/
+}
+
+.errormsg {
+    color: #FF0000;
+    font-size: 1.2em;
+    margin-left: 50px;
+}
+
+.error-msg {
+    /*color:#ff6a00;*/
+    color: #d40f7d;
+    font-size: 0.8em;
+}
+
+.successmsg {
+    color: #1b59a6;
+    font-size: 1.2em;
+    margin-left: 50px;
+}
+
+.portalheader {
+    /*font-size:1.66em;
+    text-transform:uppercase;
+    line-height:1.1em;
+    display:inline-block;
+    margin:5px 0px 5px 0px;
+    padding:5px 0px 5px 0px;
+    border-bottom:1px solid #dae6ec;*/
+
+    font-weight: bold;
+    display: inline-block;
+    margin: 5px 0px 5px 0px;
+    padding: 5px 0px 5px 0px;
+    color: var(--color-medium-blue);
+    font-size: 2.5rem;
+}
+
+.portalheader-in-table {
+    font-size: 1.66em;
+    text-transform: uppercase;
+    line-height: 1.1em;
+    margin: 5px 0px 5px 0px;
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #dae6ec;
+}
+
+.portaldescriptor {
+    color: #777777;
+    font-size: 1.1em;
+}
+
+.status {
+    display: inline-block;
+    margin: 20px;
+    /*text-transform:uppercase;*/
+    color: #d40f7d;
+    /*margin-left:40px;*/
+}
+
+.scale {
+    width: 90%;
+    background-color: #EDEDED;
+    height: 20px;
+    text-align: left;
+    color: #83bb52;
+    font-size: 1em;
+    /*margin:5px;*/
+    padding: 3px;
+    margin-left: 55px;
+}
+
+.scale_value {
+    background-color: #83bb52;
+    height: 20px;
+    color: #ffffff;
+    float: left;
+    font-size: 1em;
+}
+
+.dir-segment {
+    /*float:left;
+    display:inline-block;*/
+    font-size: 1em;
+}
+
+.dir-segments {
+    width 40%;
+    text-align: left;
+    padding: 3px;
+    margin-left: 55px;
+    float: left;
+    display: inline-block;
+}
+
+.ddlLarge {
+    color: var(--color-dark-pastel-green);
+    font-size: 3.75rem;
+    text-align: center;
+    margin: 1rem;
+    font-family: 'Hot-Mess';
+    line-height: 1.4em;
+    margin: 0.25em 0 0.25em 0;
+    width: 100%;
+}
+
+    .ddlLarge span {
+        /*color:#0072CE;*/
+        color: var(--color-bondi-blue);
+        font-size: 3rem;
+        font-family: Gotham,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,'Helvetica Neue',sans-serif;
+    }
+
+    .ddlLarge select {
+        color: var(--color-bondi-blue);
+        font-size: 2rem;
+        font-family: Gotham,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,'Helvetica Neue',sans-serif;
+        line-height: 1em;
+        width: 100%;
+    }
+
+.download {
+    color: #fff !important;
+    border-color: #ccc !important;
+    background-color: #419fd7 !important;
+    line-height: 1.2em !important;
+    font-size: 0.8em;
+    margin: 3px;
+}
+
+    .download:hover {
+        background-color: #ec008c !important;
+    }
+
+.tooltipcontainer {
+    position: relative;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    right: -200px;
+    width: 180px;
+    top: -20px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border: 1px solid #f0f0f0;
+    line-height: 20px;
+    opacity: 100;
+}
+
+a:hover .tooltip {
+    display: block;
+    text-decoration: none;
+}
+
+.disabled {
+    border: 1px solid #666666 !important;
+    background-color: #999999 !important;
+}
+
+    .disabled:hover {
+        border: 1px solid #666666 !important;
+        background-color: #999999 !important;
+    }
+
+.ms-dlgContent {
+    position: fixed;
+}
+
+#downloads label {
+    font-size: 0.8em;
+    display: inline;
+}
+
+#downloads span {
+    /*display:inline;*/
+}
+
+.num {
+    display: inline-flex;
+    padding: 10px;
+    border: 2px solid var(--color-dark-pastel-green);
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 1.4em;
+}
+
+.fa-ul {
+    /*margin-left:5em;*/
+}
+
+    .fa-ul li {
+        /*line-height:3em;*/
+    }
+
+.button {
+    border: 2px solid #00aecc;
+}
+
+    .button:hover {
+        background-color: #00aecc;
+    }
+
+/*2021 styles added*/
+.link.link--pill {
+    /*padding: 0.5rem 2rem;*/
+    margin: 1rem;
+}
+
+    .link.link--pill:hover /*2021 button class*/ {
+        background: var(--color-light-grey);
+        text-decoration: none;
+        color: var(--color-bondi-blue);
+        border: 0px;
+    }
+
+img {
+    width: auto;
+}
+
+.section--margins-x {
+    text-align: left;
+}
+
+.section--margins {
+    margin: 0px;
+}
+
+.exhibitor-name, .exhibitor-selection {
+    text-align: center;
+}
+
+.text-pink {
+    color: #d40f7d;
+}
+
+.text-grey {
+    color: #444;
+}
+
+.ex-table td {
+    border: 0px;
+    text-align: left;
+}
+
+input[type="radio"], input[type="checkbox"], input[type="button"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+fieldset {
+    border: none;
+    border-width: 0px;
+}
+
+table, th, td {
+}
+
+table, th, td, .radio-list-table, .radio-list-table td {
+    border: none;
+    border-width: 0px;
+    text-align: left;
+}
+
+.search-results-overlay {
+    position: absolute;
+    background-color: rgba(255,255,255,0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--color-pacific-blue);
+    text-align: center;
+    z-index: 100;
+}
+
+.search-results-overlay-spinner {
+    margin-top: 25%;
+    color: var(--color-pacific-blue);
+    text-align: center;
+}
+
+.search-results {
+    position: relative;
+}
+
+.text--white {
+    color: #fff !important;
+}
+
+table.products-table th {
+    font-weight: 700;
+    border: 0px;
+    color: #fff;
+    background: var(--linear-gradient-pacific-blue-to-bondi-blue)
+}
+
+table.products-table th, table.products-table td {
+    font-size: 0.9em;
+}
+
+table.products-table td {
+    border: 2px solid #fff;
+}
+
+.agree-margin {
+    margin: 20px 0px 10px 40px;
+    display: inline-block;
+}

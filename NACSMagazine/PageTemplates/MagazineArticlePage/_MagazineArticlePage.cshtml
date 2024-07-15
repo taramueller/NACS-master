@@ -1,0 +1,203 @@
+﻿)@using Kentico.Content.Web.Mvc.PageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@model TemplateViewModel
+
+@{
+    var templateModel = Model.GetTemplateModel<NACSMagazine.ArticlePage>();
+}
+
+<div class="container">
+    <!--Full Content Area-->
+    <div class="row article-wrapper">
+        @*<div class="article-top col-12 order-2">
+            <cms:CMSWebPartZone ZoneID="TitleZone" runat="server" />
+        </div>*@
+        <!--Content Area Right-->
+        <style type="text/css">
+            .reading-time {
+                float: right;
+                padding: 5px 10px;
+                background: #F0F0F0;
+                border-radius: 14px;
+            }
+
+            #teaser-container {
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                padding: 20px;
+                text-align: center;
+            }
+        </style>
+        <div class="col-lg-8 order-3">
+            <h2 class="font-g-48-b">@templateModel.ArticleContent.Title</h2>
+            <p class="font-m-22">@templateModel.ArticleContent.LedeText</p>
+            <img class="img-fluid" src="@(string.IsNullOrEmpty(templateModel.ArticleContent.RollupImage.Url) ? @templateModel.ArticleContent.RollupImageURL : @templateModel.ArticleContent.RollupImage.Url)" alt="@templateModel.ArticleContent.Title" />
+            <div class="row img-pad">
+                <p class="font-m-16 col-12" style="white-space:nowrap">
+                    {% FormatDateTime(IssueDate, "MMMM yyyy") %}
+                    <span class="reading-time"><i class="far fa-clock"></i>&nbsp;<span id="time"></span> minute read</span>
+                </p>
+                <p class='col-9 col-md-9 font-m-16'>By: @templateModel.ArticleContent.AuthorNames</p>
+               
+            </div>
+
+            <div class="article-body">
+                @if (templateModel.ArticleContent.Locked == true @*&& !.IsInRole("NACSMagazineSubscriber;MemberContent;FullMember") && (Request.QueryString.access != "Paytronix")*@)
+                {
+                        @Html.Raw(templateModel.ArticleContent.PageContentTeaser)
+
+                        <div id="teaser-container">
+                            <i class="fas fa-user-lock fa-lg" style="margin-right:10px"></i>Subscribers can view the full article. <a href="https://{% CurrentSite.SiteDomainName #%}/Convenience.org/ApplicationPages/Login.aspx?Source={% URLEncode(" https: //" + CurrentSite.SiteDomainName + GetDocumentUrlByID(DocumentID)) #%}">Log in <i class="fas fa-sign-in"></i></a> or <a href="https://mynacs.convenience.org/My-Account/Subscriptions">subscribe</a> today.
+                        </div>
+                }
+
+                @if (templateModel.ArticleContent.Locked == false @*|| CurrentUser.IsInRole("NACSMagazineSubscriber;MemberContent;FullMember")  || (QueryString.access == "Paytronix" AND CurrentDocument.RelativeURL == "~/Issues/July-2023/Get-In-on-the-National-Day-Craze") *@)
+                {
+                    <article id="article">
+                        @Html.Raw(templateModel.ArticleContent.PageContent)
+                    </article>
+                }
+
+                <script type="text/javascript">
+                function readingTime() {
+                const text = document.getElementById("article").innerText;
+                const wpm = 225;
+                const words = text.trim().split(/\s+/).length;
+                const time = Math.ceil(words / wpm);
+                document.getElementById("time").innerText = time;
+                }
+                readingTime();
+                </script>
+
+                @* <!--Slide Show-->
+                <div class="article-slider">
+                    <div class="article-slider-item">
+                        <img class="d-block w-100" src="{% GetAttachmentUrl(AttachmentName, NodeAliasPath) %}" alt="First slide">
+                        <div class="article-slider-item-content">
+                            <p>{% AttachmentTitle %}</p>
+                        </div>
+                    </div>
+                </div> *@
+            </div>
+        </div>
+
+
+        <!--Sidebar-->
+        <div class="col-lg-4 sidebar-column order-5 order-lg-4">
+
+            <!--Content-->
+            <div class="row sidebar-container">
+                <div class="w-100 font-g-28-b"><p>Editor&#8217;s Picks</p></div>
+                @* @foreach (var article in Model.EditorsPicks)
+                {
+                    <div class="col-md-6 col-lg-12 sidebar-tile">
+                        <div>
+                            <a href="<%# GetDocumentUrlById(Eval(" DocumentID").ToString()) %>
+                                "><p><%# Eval("Title") %></p>
+                                <p><%# Eval("LedeText") %></p>
+                            </a>
+                        </div>
+                    </div>
+                } *@
+            </div>
+
+            <!-- Ad-->
+            @* TODO: Based on how ads are delivered, we will need to determine how to implement this. For now, we will leave this commented out.*@
+            @* <div class="row ad-container">
+                <cms:CMSWebPartZone ZoneID="SidebarAdZone" runat="server" />
+            </div> *@
+
+        </div>
+
+        <!-- Div removed here-->
+
+        <div class="col-12 order-4 order-lg-5">
+            @foreach (var author in templateModel.ArticleContent.Authors)
+            {
+                <!--Author-->
+                <div class="author-container">
+                    <div class='row author-tile'>
+                        <img class="col-md-4" alt="@author.FullName" src="@author.Headshot == null ? @author.HeadshotURL : @author.Headshot">
+                        <div class="col-md-8">
+                            <p class="font-g-24">@author.FullName</p>
+                            <p class="font-m-18">@author.Bio</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!--Sharing and Social-->
+            <div class="row">
+
+                <!-- AddToAny BEGIN -->
+                <div style='line-height:32px;margin-right:1rem'>
+                    <i class="far fa-share-alt" style="margin-right:0.5rem;margin-left:0.5rem;line-height:32px;color:#999"></i>Share:
+                </div>
+
+                <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-icon-color="transparent,#005f9d">
+                    <a class="a2a_button_linkedin" title="Share this article on LinkedIn"></a>
+                    <a class="a2a_button_facebook" title="Share this article on Facebook"></a>
+                    <a class="a2a_button_twitter" title="Share this article on Twitter"></a>
+                    <a class="a2a_button_reddit" title="Share this article on Reddit"></a>
+                    <a class="a2a_button_microsoft_teams" title="Share this article on Teams"></a>
+                    <a class="a2a_button_email" title="Email this article to a friend" style="color:rgba(39,94,153,.75) !important"></a>
+                    <a class="a2a_dd" href="https://www.addtoany.com/share" title="Open all sharing options"></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div style='line-height:32px;margin-right:1rem'>
+                    <i class="far fa-print" style="margin-right:0.5rem;margin-left:0.5rem;line-height:32px;color:#999"></i>Print:
+                </div>
+                <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-icon-color="transparent,#005f9d">
+                    <a class="a2a_button_print" title="Print article" style="margin-right:10px;height:32px;line-height:32px;color:#005f9d"></a>
+                </div>
+
+                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                <!-- AddToAny END -->
+
+            </div>
+            <!--Related Content-->
+            <div class="related-container">
+                <div class="row">
+                    <div class="container-fluid justify-content-center section-title">
+                        <hr class="">
+                        <p class="d-flex justify-content-center">You May Also Like</p>
+                    </div>
+
+                    @* @foreach (var article in Model.OtherArticlesList)
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <a href="<%# GetDocumentUrlById(Eval(" DocumentID")) %>
+                                ">
+                                <div class="mx-auto three-tile">
+                                    <img class="img-fluid justify-content-center" src="<%# IfEmpty(Eval(" RollupImage"), Eval("RollupImageURL"), "/CMSPages/GetFile.aspx?guid=" + Eval("RollupImage")) %>">
+                                    <div>
+                                        <p class="font-g-14"><%# Eval("ContentCategory").ToString().Split('|')[0] %></p>
+                                        <p class="font-g-24"><%# Eval("Title") %></p>
+                                        <p class="font-m-16"><%# FormatDateTime(Eval("IssueDate"), "MMMM yyyy") %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    } *@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12 col-sm-8 main-content">
+    </div>
+    <div class="col-12 col-sm-4 right-rail">
+        <cms:CMSWebPartZone ZoneID="RightTopWidgetZone" runat="server" />
+        <cms:CMSWebPartZone ZoneID="AdZone" runat="server" />
+        <cms:CMSWebPartZone ZoneID="RightBottomWidgetZone" runat="server" />
+    </div>
+</div>

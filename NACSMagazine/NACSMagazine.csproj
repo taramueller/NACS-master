@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <UserSecretsId>b768f983-ecbf-4e3f-980b-68610dc14505</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\MyFeature\**" />
+    <Content Remove="Features\MyFeature\**" />
+    <EmbeddedResource Remove="Features\MyFeature\**" />
+    <None Remove="Features\MyFeature\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="PageTemplates\CategoryPage\CategoryPage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="C:\Users\Administrator\.nuget\packages\kentico.xperience.tagmanager\3.0.0\contentFiles\any\net6.0\wwwroot\js\ktc-tagmanager.js" Link="wwwroot\js\ktc-tagmanager.js">
+      <Private>False</Private>
+      <NuGetPackageVersion>3.0.0</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <NuGetPackageId>Kentico.Xperience.TagManager</NuGetPackageId>
+      <Pack>false</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Kentico.Xperience.WebApp" Version="29.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Widgets\WelcomeWidget\WelcomeWidget.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NACS.Portal.Core\NACS.Portal.Core.csproj" />
+  </ItemGroup>
+
+
+
+</Project>

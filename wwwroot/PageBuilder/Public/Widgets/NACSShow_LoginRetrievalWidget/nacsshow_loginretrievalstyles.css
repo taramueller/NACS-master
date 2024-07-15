@@ -1,0 +1,80 @@
+﻿.checkmark {
+    vertical-align: middle;
+    width: 25px;
+    margin: 15px 5px 5px 5px;
+}
+
+.notification {
+    vertical-align: middle;
+    width: 40px;
+    margin-left: 10px;
+    float: left
+}
+
+.textInput {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: auto;
+}
+
+.login-error-msg {
+    color: #ff6a00;
+    /*display:inline-block !important;
+    padding:10px;*/
+}
+
+.error-msg {
+    color: #ff6a00;
+}
+
+.nacs-notification {
+    display: none;
+}
+
+fieldset {
+    padding: .35em 0 .75em;
+    border: 0px;
+}
+
+    fieldset label {
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+/*2021 styles added*/
+.link.link--pill:hover /*2021 button class*/ {
+    background: var(--color-light-grey);
+    text-decoration: none;
+    color: var(--color-bondi-blue);
+}
+
+.progress-overlay {
+    position: fixed;
+    background-color: rgba(255,255,255,0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--color-pacific-blue);
+    text-align: center;
+    z-index: 1000;
+}
+
+.progress-overlay-spinner {
+    /*margin-top:25%;
+    color:var(--color-pacific-blue);
+    text-align: center;*/
+    position: absolute;
+    top: 40%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.progress {
+    position: relative;
+}
+
+.left {
+    text-align: left;
+}

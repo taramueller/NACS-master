@@ -1,0 +1,185 @@
+﻿@using Kentico.Content.Web.Mvc.PageBuilder
+@{
+	Layout = "_Layout";
+}
+
+@model TemplateViewModel
+
+@{
+    var templateModel = Model.GetTemplateModel<NACSMagazine.IssuePage>();
+}
+
+<!--Body-->
+<div class="container page-wrapper">
+    <style type="text/css">
+        .issue-container img {
+          box-shadow:0 0 10px #ddd !important;
+          padding:0px;
+          margin:-20px;
+        }
+        @@media (min-width: 991.5px)
+          {
+          .issue-copy-tile {
+            padding-top: 60px;
+            padding-left: 60px;
+          }
+        }
+        @@media (min-width: 991.5px)
+          {
+          .issue-copy-tile.dig {
+            padding-top: 145px;
+            padding-left: 102px;
+          }
+        }
+    </style>
+    
+        <div class="container-fluid issue-container">
+            <div class="row">
+                <div class="col-12 col-lg-3">
+                <img alt="@templateModel.Issue.Title" class="d-block img-fluid mx-auto w-100" src="@(string.IsNullOrEmpty(templateModel.Issue.MagazineCover.Url) ? @templateModel.Issue.MagazineCoverURL : @templateModel.Issue.MagazineCover.Url)" />
+                </div>
+                <div class="col-lg-7 issue-copy-tile">
+                    <h2>@templateModel.Title</h2>
+                <p class="font-m-16">@Html.Raw(templateModel.Issue.IssueIntro)</p>
+                </div>
+                <div class="col-lg-2 issue-copy-tile dig">
+                <a href="@templateModel.Issue.DigitalIssueLink" target="_blank" class="btn btn-primary" style="padding:10px 20px 6px 20px; @(string.IsNullOrEmpty(templateModel.Issue.DigitalIssueLink) ? "display:none" : "display:inline-block;")">View Digital Version <i class="fas fa-external-link" style="margin-left:5px"></i></a>
+                </div>
+            </div>
+        </div>
+   
+
+    <div class="container section-spacer" style="">
+        <div class="container-fluid justify-content-center section-title">
+            <hr class="">
+            <p class="d-flex justify-content-center">Features</p>
+        </div>
+        @foreach (var article in templateModel.CurrentFeaturedArticleList)
+        {
+            <div class="col-md-6 col-xl-12 feature-tile">
+                <div class="row">
+                    <div class="col-xl-8">
+                        @* TODO: Get Article Url *@
+                        <a href="">
+                            <p class="font-g-18-b">@article.Title</p>
+                            <p class="font-m-16">@article.LedeText</p>
+                        </a>
+                    </div>
+                    <div class="col-xl-4 order-first order-xl-last">
+                        <img class="d-flex d-xl-none img-fluid" src="@(string.IsNullOrEmpty(article.RollupImage.Url) ? @article.RollupImageURL : @article.RollupImage.Url)">
+                            <img class="d-none d-xl-block img-fluid" src="@(string.IsNullOrEmpty(article.RollupImage.Url) ? @article.RollupImageURL : @article.RollupImage.Url)">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="container section-spacer" style="">
+        <div class="container-fluid justify-content-center section-title">
+            <hr class="">
+            <p class="d-flex justify-content-center">Departments</p>
+        </div>
+            @{
+
+                string GetDeptHeader(string key, string newValue)
+                {
+                      string oldValue = (string)(CMS.Helpers.RequestStockHelper.GetItem(key) ?? "");
+
+                    if (oldValue == "" || newValue != oldValue) {
+                        CMS.Helpers.RequestStockHelper.Add(key, newValue);
+
+                        string csscolor = GetColor(newValue);
+                        string output = "";
+
+                        // if (index > 0) {
+                        //     output += "</div>";
+                        // }
+                        //output += "<div class='col-md-6 col-xl-12 dept-tile'>";
+                        output += "<div class='row dept-banner'>";
+                        output += "<div class='col-auto " + csscolor + "'>";
+                        output += "<p class='font-g-24-m'>" + newValue + "</p>";
+                        output += "</div>";
+                        output += "<div class='col'>";
+                        output += "</div>";
+                        output += "</div>";
+                        output += "<div class='row'>";
+
+                        return output;
+                    }
+                    return string.Empty;
+                }
+
+                string GetColor(string category)
+                {
+                    if (category == "Inside Washington")
+                        return "red2";
+                    else if (category == "Ideas 2 Go")
+                        return "yellow2";
+                    else if (category == "Gas Station Gourmet")
+                        return "blue2";
+                    else if (category == "Category Close-Up")
+                        return "orange2";
+                    else if (category == "By the Numbers")
+                        return "red2alt";
+                    else
+                        return "blue1";
+                }
+            }
+
+           
+
+            @foreach (var article in templateModel.ArticleList)
+            {
+
+            var headerHtml = GetDeptHeader("Department", article.MagazineSection);
+            @Html.Raw(headerHtml)
+
+            <div class="col-md-6 col-xl-12 dept-tile">
+                <div class="row">
+                        <div class="col-xl-8">
+                            @* TODO: Get URL *@
+                            <a href="">
+                                <p class="font-g-18-b">@article.Title</p>
+                                <p class="font-m-16">@article.LedeText</p>
+                            </a>
+                        </div>
+                        <div class="col-xl-4 order-first order-xl-last">
+                        <img class="d-flex d-xl-none img-fluid" src="@(string.IsNullOrEmpty(article.RollupImage.Url) ? @article.RollupImageURL : @article.RollupImage.Url)">
+                        <img class="d-none d-xl-block img-fluid" src="@(string.IsNullOrEmpty(article.RollupImage.Url) ? @article.RollupImageURL : @article.RollupImage.Url)">
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+
+    <!--Other Issues-->
+    <div class="container section-spacer" style="">
+	    <div class="container-fluid justify-content-center section-title">
+		    <hr class="">
+		    <p class="d-flex justify-content-center">Explore Other Issues</p>
+	    </div>
+
+	    <!--new carousel-->
+	    <div class="slider-programs-container">
+		    <div class="slider-programs slider-inner row w-100 mx-auto" role="listbox">
+                @foreach (var issue in templateModel.OtherIssuesList)
+                {
+                    <div class="slider-item">
+                        <div class="panel panel-default">
+                            <div class="panel-thumbnail">
+                                @* TODO: Get URL *@
+                                <a href="" title="@issue.Title" class="thumb">
+                                    <div class="image-box"><img class="img-fluid mx-auto d-block" src="@(string.IsNullOrEmpty(issue.MagazineCover .Url) ? @issue.MagazineCoverURL : @issue.MagazineCover.Url)"></div>
+                                        <div class="thumb-content">
+                                            <h4 class="font-g-18-b">@issue.Title</h4>
+                                            <p>@Html.Raw(issue.IssueIntro)</p>
+                                        </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+	    </div>
+
+    </div>
+</div>

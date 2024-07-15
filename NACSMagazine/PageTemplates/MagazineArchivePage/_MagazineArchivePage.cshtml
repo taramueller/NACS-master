@@ -1,0 +1,109 @@
+﻿@using Kentico.Content.Web.Mvc.PageBuilder
+@using Microsoft.AspNetCore.Http
+@using NACSMagazine
+@{
+    Layout = "_Layout";
+}
+
+@model TemplateViewModel
+
+@{
+    var templateModel = Model.GetTemplateModel<NACSMagazine.ArchivePage>();
+}
+
+<div class="row">
+    <div class="col-12 cmain-content">
+        @Html.Raw(templateModel.PageContent)
+
+        @using (Html.BeginForm("Index", "MagazineArchivePageTemplateController", FormMethod.Post))
+        {
+
+            <div class="d-flex  flex-sm-row flex-column container">
+                <div class="p-2  flex-fill align-self-center">
+                    <p class="font-g-16-m p-0 m-0">Find a Specific Issue</p>
+                </div>
+                <div class="form-group  px-1 form-group  flex-fill">
+                    @Html.DropDownListFor(x => x.GetTemplateModel<NACSMagazine.ArchivePage>().SelectedMonth, templateModel.Months, "Months", new { @class = "DropDownField form-control"})
+                </div>
+                <div class="form-group  px-1  flex-fill">
+                    @Html.DropDownListFor(x => x.GetTemplateModel<NACSMagazine.ArchivePage>().SelectedYear, templateModel.Years, "Years", new { @class = "DropDownField form-control"})
+                </div>
+                <div class="p-2">
+                    <input class="btn btn-success btn-lg px-4 me-sm-3 flex-fill my-btn"  type="submit" value="Apply Filter" />
+                </div>
+            </div>
+        }
+        <div class="container section-spacer">
+            <style>
+                .img-fluid {
+                    box-shadow: 0px 0px 10px #ddd;
+                    max-width: 60%
+                }
+
+                .three-tile div {
+                    padding: 25px 0px;
+                }
+            </style>
+            <div class="row mb-5">
+                @foreach (var issue in templateModel.IssuesList)
+                {
+                    <div class="col-md-6 col-lg-4 archive-tile">
+                        @* TODO: Get page URL *@
+                        <a href="">
+                            <div class="mx-auto three-tile">
+                                <div class="text-center lt-border my-5">
+                                    @if (issue.MagazineCover != null && !string.IsNullOrEmpty(issue.MagazineCoverURL))
+                                    {
+                                        <img alt="@issue.Title" class="img-fluid justify-content-center" src="@(string.IsNullOrEmpty(issue.MagazineCover.Url) ? issue.MagazineCoverURL : issue.MagazineCover.Url)"/>
+                                    }
+                                </div>
+                                <p class="font-g-24">@issue.Title</p>
+                                @* TODO: This is adding extra p-tags because of the rich text editor - need to figure out how to resolve this. *@
+                                <p class="font-m-16 py-2">@Html.Raw(issue.IssueIntro)</p>
+                                <button type="button" class="btn btn-secondary my-4">Learn More</button>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+            @if(templateModel.TotalPages > 1)
+            {
+                var success = int.TryParse(Context.Request.Query["page"], out int pageValue);
+                var prev = 1;
+                var next = 2;
+
+                if (success)
+                {
+                    prev = pageValue - 1;
+                    next = pageValue + 1;
+                }
+                
+                if (templateModel.IssuesList.HasPrevious)
+                {
+                    var pageUrl = templateModel.SystemFields.WebPageUrlPath + "?page=" + prev;
+                    <a href='@pageUrl'><i class="far fa-angle-double-left"></i>&nbsp;Previous</a>
+                }
+
+                for (int i = 1; i <= templateModel.TotalPages; i++)
+                {
+                    if(i != templateModel.PageNumber)
+                    {
+                        var pageUrl = templateModel.SystemFields.WebPageUrlPath + "?page=" + i;
+                        <a href='@pageUrl'>@i</a>
+                    }
+                }
+
+                if(templateModel.IssuesList.HasNext)
+                {
+                    var pageUrl = templateModel.SystemFields.WebPageUrlPath + "?page=" + next;
+                    <a href='@pageUrl'>Next&nbsp;<i class="far fa-angle-double-right"></i></a>
+                }
+            }
+            @* <li class="page-item"><a href="<%# Eval(" PageURL", true) %>" class="page-link"><%# Eval("Page") %></a></li>
+            <div style="width:0px;"></div>
+            <li class="page-item"><a class="page-link active" href="<%# Eval(" PageURL", true) %>"><%# Eval("Page") %></a></li> *@
+        </div>
+    </div>
+        
+    </div>
+</div>

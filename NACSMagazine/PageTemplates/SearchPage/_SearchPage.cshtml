@@ -1,0 +1,28 @@
+﻿@using Kentico.Content.Web.Mvc.PageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@model TemplateViewModel
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12" style="text-align:center;">
+            <cms:CMSWebPartZone ZoneID="TitleZone" runat="server" />
+        </div>
+
+        <div class="col-12 col-sm-8 main-content">
+            <div class="container my-3"><p class="font-g-24" style="color:rgba(39,94,153,.75)">Articles</p></div>
+            <cms:CMSWebPartZone ZoneID="LeftWidgetZoneTop" runat="server" />
+            <cms:CMSWebPartZone ZoneID="ContentZone" runat="server" />
+            <cms:CMSWebPartZone ZoneID="LeftWidgetZone" runat="server" />
+        </div>
+        <div class="col-12 col-sm-4 right-rail">
+            <div class="container my-3"><p class="font-g-24" style="color:rgba(39,94,153,.75)">Other</p></div>
+            <cms:CMSWebPartZone ZoneID="RightTopWidgetZone" runat="server" />
+            <cms:CMSWebPartZone ZoneID="AdZone" runat="server" />
+            <cms:CMSWebPartZone ZoneID="RightBottomWidgetZone" runat="server" />
+        </div>
+    </div>
+</div>

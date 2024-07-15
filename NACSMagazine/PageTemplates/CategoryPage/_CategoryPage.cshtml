@@ -1,0 +1,96 @@
+﻿@using Kentico.Content.Web.Mvc.PageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@model TemplateViewModel
+
+
+@{
+    var viewModel = Model.GetTemplateModel<NACSMagazine.CategoryPage>();
+}
+
+<!--Content-->
+<div class="container my-5">
+
+    <div class=" justify-content-center section-title">
+        <hr class="">
+        <p class="d-flex justify-content-center">
+            @viewModel.Title
+        </p>
+    </div>
+
+    <div class="container">
+
+        <div class="d-flex flex-sm-row flex-column">
+            <div class="mr-auto p-2">
+                <p class="goth-light p-0 m-0">
+                    @{
+                        var sub = viewModel.ArticleList.Count % 9;
+                    }
+                    
+                    Showing @((viewModel.PageNumber == 0 ? 1 : (viewModel.PageNumber * 9) - 8)) - @(viewModel.ArticleList?.Count < 9 ? viewModel.ArticleList?.Count : (viewModel.PageNumber * 9 + (sub - 9))) of @viewModel.ArticleList?.Count items
+                        
+                    
+                </p>
+            </div>
+            <div class="p-0 align-self-center">
+                <p class="font-g-16-m">Magazine Article Date</p>
+                <p id="customDD">
+                    @using (Html.BeginForm("Index", "MagazineArchivePageTemplateController", FormMethod.Post))
+                    {
+                        <div class="form-group  px-1  flex-fill" style="width:125%;">
+                            @Html.DropDownListFor(x => x.GetTemplateModel<NACSMagazine.CategoryPage>().SelectedYear, viewModel.Years, "Years", new { @class = "DropDownField form-control" })
+                        </div>
+                        <div class="p-2">
+                            <input class="btn btn-success btn-lg px-4 me-sm-3 flex-fill my-btn" type="submit" value="Apply Filter" />
+                        </div>
+                    }
+                </p>
+            </div>
+        </div>
+        @if(viewModel.ArticleList != null)
+        {
+            foreach(var article in viewModel.ArticleList)
+            {
+                <div class="row mb-0">
+                    <div class="col-md-6 col-lg-4 story-tile">
+                        <div class="mx-auto">
+                            <div class="lt-border my-4">
+                                <a href="<%# SearchResultUrl() %>">
+                                    <p class="font-g-24-m pt-4 px-4">@article.Title</p>
+                                </a>
+                                <p class="font-m-16 px-4 pb-3">@article.LedeText</p>
+                                <a href="<%# SearchResultUrl() %>">
+                                    <img alt="@article.Title" class="img-fluid justify-content-center" src="@article.RollupImage.Url">
+                                </a>
+                                <div class="d-flex flex-sm-row flex-column">
+                                    <div class="mr-auto p-4" style="padding:0.5rem 1.5rem 0.5rem 1.5rem !important">
+                                        <p class="font-m-14">@article.IssueDate.ToString("MMMM yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <nav aria-label="Page navigation example">
+
+            <ul class="pagination justify-content-center my-5">
+                Showing @((viewModel.PageNumber == 0 ? 1 : (viewModel.PageNumber * 9) - 8)) - @(viewModel.ArticleList?.Count < 9 ? viewModel.ArticleList.Count : (viewModel.PageNumber * 9 + (sub - 9))) of @viewModel.ArticleList?.Count items
+            </ul>
+
+        </nav>
+        @* <cms:CMSWebPartZone ZoneID="RollupZone" runat="server" /> *@
+        @* This is empty on purpose. *@
+    </div>
+
+</div>
+<!-- Ads-->
+<div class="container section-spacer">
+    <div class="row ad-container justify-content-lg-center">
+        @* <cms:CMSWebPartZone ZoneID="AdZone_Bottom" runat="server" /> *@
+        @* This is where ads would go. *@
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿.style1 {
+    text-decoration: underline;
+}
+
+.errorBox {
+    color: red;
+}
+
+fieldset > label {
+    /*width: 200px;*/
+    display: inline-block;
+    text-align: left;
+}
+
+fieldset {
+    border: none;
+    padding: .35em .75em .625em;
+}
+
+.button1 {
+    background-color: #004c97 !important;
+    color: #FFFFFF !important;
+    width: 30% !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .875rem;
+    display: block;
+}
+
+    .button1:hover {
+        background-color: #FFFFFF !important;
+        color: #004c97 !important;
+        width: 30% !important;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: .875rem;
+        display: block;
+    }
+
+.img {
+    width: 20px !important;
+}
+
+/*input, textarea {
+            width: 100% !important;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+            border-radius: 1rem !important;
+            border: 2px solid var(--color-sapphire) !important;
+            color: var(--color-sapphire) !important;
+        }*/
+
+input[type="checkbox"] {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    border-radius: 1rem !important;
+    width: auto !important;
+}
+
+.clear {
+    clear: both;
+}
+
+.link.link--pill:hover {
+    background: var(--color-light-grey);
+    text-decoration: none;
+    color: var(--color-bondi-blue);
+}
+
+.link.link--pill.working {
+    background: var(--color-light-grey);
+    text-decoration: none;
+    color: var(--color-medium-grey);
+}

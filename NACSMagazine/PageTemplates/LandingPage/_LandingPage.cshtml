@@ -1,0 +1,17 @@
+﻿@using Kentico.Content.Web.Mvc.PageBuilder
+@using NACSMagazine
+@{
+    Layout = "_Layout";
+}
+
+@model TemplateViewModel
+
+@{
+    var templateModel = Model.GetTemplateModel<NACSMagazine.LandingPage>();
+}
+
+<div class="row">
+    <div class="col-12 cmain-content">
+        @Html.Raw(templateModel.PageContent)
+    </div>
+</div>

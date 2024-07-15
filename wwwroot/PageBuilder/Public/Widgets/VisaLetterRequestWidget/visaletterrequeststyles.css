@@ -1,0 +1,135 @@
+﻿#controlWell fieldset label {
+    width: 150px;
+    text-align: right
+}
+
+fieldset > label {
+    width: 200px;
+    display: inline-block
+}
+
+    fieldset > label.mini {
+        width: auto
+    }
+
+input.textInput {
+    float: none !important
+}
+
+#controlWell label.fullLabel {
+    width: 100%;
+    text-align: left
+}
+
+#controlWell label.mini {
+    width: 25px
+}
+
+#controlWell fieldset span {
+    display: inline
+}
+
+#controlWell fieldset select {
+    margin-right: 8px
+}
+
+#controlWell fieldset input {
+    margin-right: 8px
+}
+
+#controlWell .textInput {
+    width: 200px
+}
+
+#controlWell .textInputReadOnly {
+    border: 1px solid #FFF;
+    color: #333
+}
+
+#controlWell .radBut {
+    margin: 5px 5px 0 75px;
+    *margin-top: 2px;
+    padding: 0
+}
+
+#controlWell .cBox label {
+    float: left;
+    padding: 1px;
+    text-align: left;
+    width: 250px
+}
+
+#controlWell .cBox .halfLabel {
+    width: 150px
+}
+
+#controlWell .cBox input {
+    float: left;
+    margin: 0 25px 0 10px
+}
+
+#controlWell .bigSelect {
+    margin: 5px 5px 0 75px;
+    width: 350px;
+    height: 150px;
+    font-size: 12px;
+    border: 1px solid #93B1D0;
+    padding: 3px
+}
+
+#controlWell .sideNote {
+    font-size: 12px;
+    font-style: italic;
+    padding-left: 15px
+}
+
+#controlWell .bottomNote {
+    font-size: 12px;
+    font-style: italic;
+    padding: 0 0 0 160px;
+    clear: both
+}
+
+    #controlWell .bottomNote a {
+        font-style: normal
+    }
+
+#controlWell .sideNote a {
+    font-style: normal
+}
+
+#controlWell .note {
+    font-size: 12px;
+    font-style: italic;
+    padding: 5px 0;
+    clear: both
+}
+
+input, textarea, select, button {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: .5em;
+    -webkit-border-radius: .25em;
+    -moz-border-radius: .25em;
+    -o-border-radius: .25em;
+    border-radius: .25em
+}
+
+    input[type=checkbox], input[type=radio] {
+        padding: 0;
+        border: 0;
+        cursor: pointer;
+        background: transparent none;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0
+    }
+
+    input:hover, textarea:hover, select:hover {
+        border-color: #ccc
+    }
+
+.errorBox {
+    color: red;
+}

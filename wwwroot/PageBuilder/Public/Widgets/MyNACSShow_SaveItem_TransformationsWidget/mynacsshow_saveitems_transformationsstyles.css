@@ -1,0 +1,17 @@
+﻿.label {
+    font-size: 1.2em;
+}
+
+.loginlink {
+    color: #2bbcf6;
+    text-decoration: underline;
+}
+
+.prompt {
+    color: #ff6a00;
+    margin: 10px 0px;
+    border: 2px solid #ff6a00;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+}

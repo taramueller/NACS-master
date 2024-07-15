@@ -1,0 +1,37 @@
+﻿.body {
+    width: 100%;
+    margin: auto;
+}
+
+.form {
+    width: 100%;
+    margin: auto;
+}
+
+.clear {
+    clear: both;
+}
+
+.page {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.divItems {
+    width: 32%;
+    float: left;
+    margin: auto;
+    min-width: 350px;
+    padding: 5px;
+    height: 300px;
+    overflow-y: scroll;
+    margin: 5px;
+    border-radius: 6px;
+}

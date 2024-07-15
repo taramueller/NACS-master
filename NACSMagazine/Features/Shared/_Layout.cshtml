@@ -1,0 +1,333 @@
+﻿@using Microsoft.AspNetCore.Mvc.Routing
+
+@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Content.Web.Mvc
+@using Kentico.Web.Mvc
+@using Kentico.Forms.Web.Mvc.Widgets
+@using Kentico.Xperience.Admin.Base.Forms
+
+@* @using Xperience.Core.Breadcrumbs
+@inject BreadcrumbHelper breadcrumbHelper *@
+
+@* @using NACSMagazine.Components.Widgets.WelcomeWidget;
+ *@
+@inject IUrlHelperFactory UrlHelperFactory 
+@{
+    var urlHelper = UrlHelperFactory.GetUrlHelper(ViewContext);
+    var currentPath = ViewContext.HttpContext.Request.Path;
+    var currentPage = currentPath == "/" ? "Home" : System.IO.Path.GetFileNameWithoutExtension(currentPath);
+}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>NACS Magazine - @ViewBag.Title</title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    @* <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"> *@
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7706976/7713392/css/fonts.css" />
+    <link rel="stylesheet" href="https://kit.fontawesome.com/097aa4c14b.css" crossorigin="anonymous">
+    @* Links a stylesheet used by the website. ASP.NET Core automatically searches for static files inside the ~/wwwroot folder. *@
+@*     <link href="~/css/styles.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/_content/NACSMagazine/css/Bootstrap4.0.0.css" rel="stylesheet" type="text/css" />
+    <link href="~/_content/NACSMagazine/css/NACSMagazine.css" rel="stylesheet" type="text/css" />
+    <link href="~/_content/NACSMagazine/css/Slick.css" rel="stylesheet" type="text/css" />
+    @if (currentPage == "Home")
+    {
+        //This info may need to be updated 
+        <meta name="description" content="The #1 trusted source of information for decision makers in the convenience industry.">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Home">
+        <meta name="twitter:description" content="The #1 trusted source of information for decision makers in the convenience industry.">
+        <meta name="twitter:site" content="@@NACSonline">
+        <meta name="twitter:image:src" content="https://www.convenience.org/App_Themes/Convenience.org/img/nacs_twitter.jpg">
+        <meta property="og:title" content="Home">
+        <meta property="og:image" content="https://www.convenience.org/App_Themes/Convenience.org/img/nacs_twitter.jpg">
+        <meta property="og:description" content="The #1 trusted source of information for decision makers in the convenience industry.">
+        <meta property="og:type" content="article">
+    }
+    @* <link href="/CMSPages/GetResource.ashx?_webparts=677" type="text/css" rel="stylesheet"> *@
+
+    @* Razor section for additional page-specific styles *@
+    @RenderSection("styles", required: false)
+  </head>
+<body>
+    <!--Begin Leaderboard Ad-->
+<div class="container-fluid hero-section-spacer">
+  <div class="row">
+    <div class="mx-auto">
+@*       <cms:CMSWebPartZone ZoneID="AdZone" runat="server" />*@
+</div>
+  </div>
+</div>
+<!--Header-->
+<div class="header-wrapper">
+  <nav class="navbar-light">
+    <!--Sign in and Help Wrapper-->
+    <div class="bg-lite-blue d-none d-lg-flex">
+      <div class="container nav-top">
+        @* <cms:CMSWebPartZone ZoneID="SignInZone" runat="server" /> *@
+        @section styles
+        {
+            @* Includes CSS necessary for page builder functionality *@
+            <page-builder-styles />
+        }
+        @section scripts
+        {
+            @* Includes scripts necessary for page builder functionality *@
+            <page-builder-scripts />
+        }
+
+        @* @{
+            var widgetProperties = new WelcomeWidgetProperties();
+        }
+
+        @await Html.Kentico().RenderStandaloneWidgetAsync("NACSMagazine.WelcomeWidget", widgetProperties); *@
+        
+        <a href="https://www.convenience.org/help"><i class="fa fa-question-circle" style="margin-right:5px;"></i>Help</a>
+      </div>
+    </div>
+    <!-- Logo and Search Wrapper Desktop-->
+    <div class="navbar container d-none d-lg-flex">
+      <div class="navbar col">
+        <a class="navbar-brand" href="/">
+          <img src="~/_content/NACSMagazine/img/icon/nav-logo.svg" width="385" height="105" alt="">
+        </a>
+      </div>
+      <div class="navbar justify-content-end col">
+        <!--<form class="form-inline search-container">-->
+        @* <cms:CMSWebPartZone ZoneID="SearchBoxZone" runat="server" /> *@
+        
+        <!--</form>-->
+      </div>
+    </div>
+    
+    <!--  Navigation Wrapper-->
+    <div class=" bg-dark-blue menu">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <!--Mobile toggle and search-->
+          <button class="navbar-toggler mobile" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <img class="d-lg-none open" src="~/_content/NACSMagazine/img/icon/icon-open-black.svg"><img class="d-lg-none close" src="~/_content/NACSMagazine/img/icon/icon-close-black.svg">
+          </button>
+          <a class="navbar-brand d-lg-none" href="#"><img src="~/_content/NACSMagazine/img/icon/nav-logo.svg" width="185" height="50" alt=""></a> 
+          <div class="form-inline justify-content-end d-lg-none push">
+            <img id="search-toggle" src="~/_content/NACSMagazine/img/icon/icon-search.png">
+          </div>
+          <div id="search-bar" class="is-hidden justify-content-end d-lg-none">
+            <!--<form class="form-inline search-container mx-auto">-->
+            @* <cms:CMSWebPartZone ZoneID="SearchBoxZone2" runat="server" /> *@
+            
+            <!--</form>-->
+          </div>
+          
+          <!--Navigation-->
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <!--Desktop Drop Down-->
+              <li class="nav-item dropdown align-self-center d-none d-lg-block d-md-none">
+                <div class="main-side container">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="white inactive" src="~/_content/NACSMagazine/img/icon/icon-open-white.png">
+                    <img class="white active" src="~/_content/NACSMagazine/img/icon/icon-close-white.png"></a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item no-bar" href="#">
+                      <img src="~/_content/NACSMagazine/img/icon/nav-logo.svg" width="200" height="55" alt="">
+                    </a>
+                    <a class="dropdown-item" href="/">Home</a>
+                    <a class="dropdown-item" href="/Issues/June-2024">Current Issue</a>
+                    <a class="dropdown-item" href="/Issues">Archive</a>
+                    <a class="dropdown-item no-bar" href="/About">About NACS Magazine</a>
+                    <div class="topic-list">   
+                      <a class="dropdown-item" href="/About/Editorial-Guidelines-Submissions">Editorial Guidelines & Submissions</a>
+                      <a class="dropdown-item" href="/About/Permissions-Reprints">Permissions & Reprints</a>
+                      <a class="dropdown-item" href="/About/Contact-NACS-Media-Group">Contact NACS Media Group</a>
+                    </div> 
+                    <a class="dropdown-item" href="https://mynacs.convenience.org/My-Account/Subscriptions" target="_blank">Subscribe</a>
+                    <a class="dropdown-item" href="https://www.convenience.org/advertise" target="_blank">Advertise</a>
+                    <p class="dropdown-item">Follow Us:</p>
+                    <div class="dropdown-item row">
+                      <a class="col" href="http://www.linkedin.com/groups/1776505" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-linkedin.svg"></a>
+                                                <a class="col" href="http://www.twitter.com/nacsonline" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-twitter.svg"></a>
+                      <a class="col" href="http://instagram.com/nacs_online" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-instagram.svg"></a>
+                      <a class="col" href="http://www.facebook.com/nacsonline" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-facebook.svg"></a>
+                      <a class="col" href="http://www.youtube.com/user/nacstv" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-youtube.svg"></a>
+                    </div>  
+                  </div>
+                </div>
+              </li>
+              
+              <!--This is the mobile Navigation-->
+              <li class="nav-item dropdown d-lg-none mobile-login">
+                @* <cms:CMSWebPartZone ZoneID="SignInZoneMobile" runat="server" /> *@
+              </li>
+              <li class="nav-item dropdown d-lg-none mobile-login">
+                <a class="nav-link" href="https://www.convenience.org/help">Help</a>
+              </li>
+              <li class="nav-item dropdown d-lg-none">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Topics</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  
+                  <a class="dropdown-item" href="/Retailer-Focus">Retailer Focus</a>
+                  <a class="dropdown-item" href="/Category-Management">Category Management</a>
+                  <a class="dropdown-item" href="/Foodservice">Foodservice</a>
+                  <a class="dropdown-item" href="/Consumers">Consumers</a>
+                  <a class="dropdown-item" href="/Legislative">Legislative</a>
+                  <a class="dropdown-item" href="/Trends-and-Research">Trends & Research</a>
+                  <a class="dropdown-item" href="/Technology">Technology</a>
+                  <a class="dropdown-item" href="/Fuels">Fuels</a>
+                </div>
+              </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link" href="/Issues/June-2024">Current Issue</a>
+              </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link" href="/Issues">Archive</a>
+              </li>
+              <li class="nav-item dropdown d-lg-none">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About NACS Magazine</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/About/Editorial-Guidelines-Submissions">Editorial Guidelines & Submissions</a>
+                  <a class="dropdown-item" href="/About/Permissions-Reprints">Permissions & Reprints</a>
+                  <a class="dropdown-item" href="/About/Contact-NACS-Media-Group">Contact NACS Media Group</a>
+                </div>
+              </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link" href="https://mynacs.convenience.org/My-Account/Subscriptions" target="_blank">Subscribe</a>
+              </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link" href="https://www.convenience.org/advertise" target="_blank">Advertise</a>
+              </li>
+              <div class="d-lg-none py-5">
+                <li class="py-4"><a href="#">Follow Us:</a></li>
+                <li class="">
+                  <a class="col" href="http://www.linkedin.com/groups/1776505" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-linkedin.svg"></a>
+                  <a class="col" href="http://www.twitter.com/nacsonline" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-twitter.svg"></a>
+                  <a class="col" href="http://instagram.com/nacs_online" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-instagram.svg"></a>
+                  <a class="col" href="http://www.facebook.com/nacsonline" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-facebook.svg"></a>
+                  <a class="col" href="http://www.youtube.com/user/nacstv" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-youtube.svg"></a>
+                </li>
+              </div>
+              
+              <!--End Mobile Navigation -->
+              
+              <!--Rest of the Desktop Nav -->     
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Retailer-Focus">Retailer Focus<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Category-Management">Category Management</a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Foodservice">Foodservice</a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Consumers">Consumers</a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Legislative">Legislative</a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Trends-and-Research">Trends & Research</a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Technology">Technology</a>
+              </li>
+              <li class="nav-item d-none d-lg-flex align-self-center">
+                <a class="nav-link" href="/Fuels">Fuels</a>
+              </li>
+              <!-- end desktop nav -->
+            </ul>
+          </div>
+          <!--end of Navigation-->
+        </nav>
+      </div>
+    </div>
+    <!-- End of navigation wrapper -->
+  </nav>
+</div>
+
+
+
+<!--Body-->
+<div class="container page-wrapper">
+  
+  <!--Breadcrumbs-->
+  <!--TODO: This still needs work. The path urls are not correct nor are the names. Plus the current page should not be linked.-->
+  @if(currentPage != "Home")
+  {
+            <div class="container breadcrumb-container">
+                <p class="font-g-16-book">
+                    <a class="CMSBreadCrumbsLink" href="/">Home</a>&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>&nbsp;&nbsp;
+                    
+                    @{
+                        var pathList = currentPath.ToString().Replace('-', ' ').Split('/').ToList();
+
+                        foreach(var path in pathList)
+                        {
+                            if (path != "")
+                            {
+                                @Html.Raw("<a class='CMSBreadCrumbsLink' href='" + path.Replace(' ', '-') + "'>" + path.Substring(0, 1).ToUpper() + path.Substring(1) + "</a>&nbsp;&nbsp;<i class='fa fa-chevron-right'></i>&nbsp;&nbsp;")
+                            }
+                        }
+                        
+                    }
+                </p>
+      </div>
+  }
+    @RenderBody()
+    </div>
+    <!--Footer-->
+    <div class="footer-wrapper bg-dark-blue">
+      <div class="container">
+        <div class="logo"><img src="~/_content/NACSMagazine/img/icon/footer-logo.svg"></div>
+        <div class="social-container row">
+          <p class="font-g-16-book col-md-6">NACS serves the global convenience and fuel retailing industry by providing industry knowledge, connections and issues leadership to ensure the competitive viability of its members’ businesses.</p>
+          <div class="col-md-6">
+            <div class="row justify-content-center justify-content-sm-start justify-content-md-end">
+                        <a class="col-2 col-sm-auto" href="http://www.linkedin.com/groups/1776505" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-linkedin.svg"></a>
+                        <a class="col-2 col-sm-auto" href="http://www.twitter.com/nacsonline" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-twitter.svg"></a>
+                        <a class="col-2 col-sm-auto" href="http://instagram.com/nacs_online" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-instagram.svg"></a>
+                        <a class="col-2 col-sm-auto" href="http://www.facebook.com/nacsonline" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-facebook.svg"></a>
+                        <a class="col-2 col-sm-auto" href="http://www.youtube.com/user/nacstv" target="_blank"><img src="~/_content/NACSMagazine/img/icon/social-youtube.svg"></a>
+            </div>
+          </div>
+        </div>
+        <div class="action-container row">
+          <a href="https://www.convenience.org/Media/NACS-Magazine/Subscribe/SubscriptionForm" target="_blank" class="font-g-16-book col-12 col-lg-auto align-self-center">Subscribe</a>
+          <a href="https://www.convenience.org/advertise" target="_blank" class="font-g-16-book col-12 col-lg-auto align-self-center">Advertise</a>
+          <a href="/About/Editorial-Guidelines-Submissions" class="font-g-16-book col-12 col-lg-auto align-self-center">Editorial Guidelines & Submissions</a>
+          <a href="/About/Permissions-Reprints" class="font-g-16-book col-12 col-lg-auto align-self-center">Permissions & Reprints</a>
+          <a href="/About/Contact-NACS-Media-Group" class="font-g-16-book col-12 col-lg-auto align-self-center">Contact NACS Media</a>
+      
+        </div>
+        <hr>
+        <div class="tos-container row">
+          <p class="font-g-16-book col-md-6">© NACS All Rights Reserved</p>
+          <div class="col-md-6">
+            <div class="row justify-content-start justify-content-md-end">
+              <a class="font-g-16-book col-auto" href="https://www.convenience.org/PrivacyPolicy" target="_blank">Privacy Policy</a> 
+              <a class="font-g-16-book col-auto" href="https://www.convenience.org/TermsOfUse" target="_blank">Terms of Use</a>
+              <a class="font-g-16-book col-auto" href="https://www.convenience.org/help" target="_blank">Help</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="~/_content/NACSMagazine/js/bootstrap.js"></script>
+    <script src="~/_content/NACSMagazine/js/slick.min.js"></script>
+    <script src="~/_content/NACSMagazine/js/custom.js"></script>
+    <script src="~/_content/NACSMagazine/js/ktc-tagmanager.js"></script>
+    @* Razor section for additional page-specific scripts *@
+    @RenderSection("scripts", required: false)
+  </body>
+</html>

@@ -1,0 +1,38 @@
+﻿.style1 {
+    width: 125px;
+}
+
+.style2 {
+    width: 100%;
+}
+
+.style3 {
+    text-align: right;
+    font-size: small;
+    font-style: italic;
+}
+
+.headerCell {
+}
+
+.errorBox {
+    color: red;
+}
+
+fieldset input, select, textarea {
+    border: 1px solid #e4e4e4;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: #727f8a !important;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+}
+
+.selectdiv input, .selectdiv select, fieldset input:not([type='radio']), fieldset select, textarea {
+    max-width: calc(100% - 18px) !important;
+    min-width: calc(100% - 18px) !important;
+}

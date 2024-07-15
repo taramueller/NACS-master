@@ -1,0 +1,73 @@
+﻿@using CMS.Membership
+@section styles
+{
+    @* Includes CSS necessary for page builder functionality *@
+    <page-builder-styles />
+}
+
+@section scripts
+{
+    @* Includes scripts necessary for page builder functionality *@
+    <page-builder-scripts />
+}
+
+@* @{
+    var user = UserInfo.Provider.Get();
+}
+@if(!user.Identity.IsAuthenticated()) *@
+{
+    <a runat="server" ID="hypLogin" href="/Convenience.org/ApplicationPages/Login.aspx">
+        <i class="fal fa-sign-in" style="margin-right:5px;"></i>Log In
+    </a>
+}
+else
+{
+
+    <asp:Panel ID="_pnlAlertMsg" runat="server" CssClass="dropdown-alert-wide" Visible="false">
+        <i class="fas fa-exclamation-triangle fa-2x" style="vertical-align:middle"></i>
+        <asp:Label ID="_lblAlertMsg" Text="" runat="server"></asp:Label>
+        <asp:HyperLink ID="_hypAlertAction" Text="" runat="server" CssClass="button alert-white"></asp:HyperLink>
+    </asp:Panel>
+
+    <asp:Literal runat="server" ID="litRoles" Mode="PassThrough" />
+
+    <span class="welcome-user">
+        <asp:Panel id="_pnlEnsureUser" runat="server" visible="false">
+            <asp:Label runat="server" ID="_lblLastUpdated" class="sync-needed"></asp:Label>
+
+        </asp:Panel>
+        <asp:Literal runat="server" ID="litWelcome" />
+    </span>
+
+
+
+    <div class="dropdown">
+        <a class="dropbtn" onmouseover="mystuffmenu()" onclick="mystuffmenu()">
+            <i class="fal fa-user-circle" style="margin-right:5px;"></i>My NACS <i class="far fa-caret-down"></i>
+        </a>
+        <div id="_divMyStuffLinks" runat="server" class="dropdown-content">
+
+
+            <a runat="server" target="MyNACS" ID="_hlProfileMX" href="<%=mxsite%>/My-Account/My-Profile"><i class="far fa-user-circle"></i>My Profile</a>
+            <br />
+            <a runat="server" target="MyNACS" ID="_hlSubscriptionsMX" href="<%=mxsite%>/My-Account/Subscriptions"><i class="far fa-newspaper"></i>My Subscriptions</a>
+            <br />
+            <a runat="server" target="MyNACS" ID="_hlEmailPreferencesMX" href="<%=mxsite%>/My-Account/Email-Preferences"><i class="far fa-envelope"></i>My Email Preferences</a>
+            <br />
+            <a runat="server" ID="_hlPurchasesMX" href="https://<%=subdomain%>.convenience.org/accountadmin/myprofile#tabs-3"><i class="far fa-shopping-bag"></i>My Purchased Content</a>
+            <br />
+
+            <div id="_divMyLinks" runat="server"><i class="far fa-link"></i>My Links:</div>
+            @* @if (currentUser.IsImpersonated() || currentUser.IsEditor())
+            {
+                Html.Raw("Profile last updated:<br /><strong>" + currentUser.UserLastModified.AddHours(1).ToString("MMM d, h:mm tt") + " EST</strong>");
+                Html.Raw("<a onclick='DisableButtonOnSync(this)' class='sync-tab-button' id='_lbSync'><i class='fas fa-sync-alt'></i>Refresh</a>");
+                Html.Raw("<div class='clear' style='padding:0px'></div>");
+            }  *@   
+        </div>
+    </div>
+    <a runat="server" ID="hypLogout" href="/Convenience.org/ApplicationPages/Logout.aspx">
+        <i class="fal fa-sign-out" style="margin-right:5px;"></i>Log Out
+
+    </a>
+}

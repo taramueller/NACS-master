@@ -1,0 +1,56 @@
+﻿.test-panel {
+    margin: 10px 0px;
+    /*padding:10px;*/
+}
+
+.mys-textbox {
+    padding: 5px;
+    width: 150px;
+    border-radius: 0px;
+}
+
+.button {
+    margin-top: 15px;
+    text-transform: initial;
+    border: 0px;
+    background-color: #00aecc;
+    color: #fff !important;
+    padding: 15px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+}
+
+    .button.disabled {
+        background-color: #ddd;
+        cursor: default;
+    }
+
+.num {
+    display: inline-flex;
+    padding: 10px;
+    border: 5px solid #00aecc;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px;
+}
+
+table, th, td {
+    border: 0px;
+    text-align: left;
+}
+
+input[type="radio"] {
+    width: auto;
+    margin: 5px;
+}
+
+p {
+    line-height: 1.5em;
+}

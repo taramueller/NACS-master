@@ -1,0 +1,155 @@
+﻿.clear {
+    clear: both;
+}
+
+.subheaderName {
+    font-size: 30px !important;
+    font-weight: 600;
+    color: #666666 !important;
+    padding-bottom: 5px !important;
+    /* font-weight: bold !important; */
+    line-height: 20px !important;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    background: var(--linear-gradient-pacific-blue-to-bondi-blue) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+    .button:hover {
+        display: inline-block;
+        padding: 10px !important;
+        border-radius: 20px !important;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none !important;
+        background: var(--color-light-grey) !important;
+        color: #009fdf !important;
+        border: none !important;
+    }
+
+.textbox, .textarea {
+    width: 350px !important;
+    padding: 5px !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--color-sapphire) !important;
+    color: var(--color-sapphire) !important;
+}
+
+.UploadField {
+    width: 250px !important;
+    padding: 5px !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--color-sapphire) !important;
+    color: var(--color-sapphire) !important;
+}
+
+.button1 {
+    width: 150px !important;
+    display: inline-block;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    background: var(--linear-gradient-pacific-blue-to-bondi-blue) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+    .button1:hover {
+        width: 150px !important;
+        display: inline-block;
+        padding: 10px !important;
+        border-radius: 20px !important;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none !important;
+        background: var(--color-light-grey) !important;
+        color: #009fdf !important;
+        border: none !important;
+        cursor: pointer;
+    }
+
+.buttonchk {
+    display: inline-block;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    background: var(--linear-gradient-pacific-blue-to-bondi-blue) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+    .buttonchk:hover {
+        display: inline-block;
+        padding: 10px !important;
+        border-radius: 20px !important;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none !important;
+        background: var(--color-light-grey) !important;
+        color: #009fdf !important;
+        border: none !important;
+    }
+
+.button2 {
+    width: 350px !important;
+    display: inline-block;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    background: var(--linear-gradient-pacific-blue-to-bondi-blue) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+    .button2:hover {
+        width: 350px !important;
+        display: inline-block;
+        padding: 10px !important;
+        border-radius: 20px !important;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none !important;
+        background: var(--color-light-grey) !important;
+        color: #009fdf !important;
+        border: none !important;
+        cursor: pointer;
+    }
+
+.slotselections {
+    background-image: url('/App_Themes/NACSShow2021Core/img/icon-select-list-open.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right !important;
+    border: 1px solid #0a2253 !important;
+    line-height: 15px !important;
+    padding: .5em 3.5em .5em 1em !important;
+    border-radius: 6px !important;
+    /*margin: 0;*/
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+.table, .tr, .td {
+    border: none !important;
+}
